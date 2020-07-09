@@ -1,0 +1,110 @@
+<div>
+    <h2>The Reactive Form Component</h2>
+    <!--The ngSubmit will post the formGroup value and perform validations-->
+    <form name="frmProduct" [formGroup]="frmProduct" (ngSubmit)="save()">
+        <div>
+            <label>Product Row Id</label>
+            <input type="text" formControlName="ProductRowId" name="ProductRowId">
+            <!--Define and execute Valdiation Errors based on ProductRowId-->
+            <div *ngIf="frmProduct.controls.ProductRowId.dirty && !frmProduct.controls.ProductRowId.valid">
+                <p *ngIf="frmProduct.controls.ProductRowId.errors.required">Value is must</p>
+                <p *ngIf="frmProduct.controls.ProductRowId.errors.minlength">Value must be 2 digits minimum</p>
+                <p *ngIf="frmProduct.controls.ProductRowId.errors.maxlength">Value can be 8 digits maximum</p>
+                <p *ngIf="frmProduct.controls.ProductRowId.errors.pattern">Value must be numeric</p>
+                <p *ngIf="frmProduct.controls.ProductRowId.errors.odd">Value must be even</p>
+            </div>
+        </div>
+        <div>
+            <label>Product Id</label>
+            <input type="text" formControlName="ProductId" name="ProductId">
+            <div *ngIf="frmProduct.controls.ProductId.dirty && !frmProduct.controls.ProductId.valid">
+                <p *ngIf="frmProduct.controls.ProductId.errors.required">Value is must</p>
+                <p *ngIf="frmProduct.controls.ProductId.errors.exists">Duplicate entry not allowed</p>
+            </div>
+        </div>
+        <div>
+            <label>Product Name</label>
+            <input type="text" formControlName="ProductName" name="ProductName">
+            <div *ngIf="frmProduct.controls.ProductName.dirty && !frmProduct.controls.ProductName.valid">
+                <p *ngIf="frmProduct.controls.ProductName.errors.required">Value is must</p>
+            </div>
+        </div>
+        <div>
+            <label>Categories</label>
+            <select formControlName="CategoryName" name="CategoryName">
+                <option *ngFor="let c of categories" value="{{c}}">{{c}}</option>
+            </select>
+        </div>
+        <div>
+            <label>Manufacturers</label>
+            <select formControlName="Manufacturer" name="Manufacturer">
+                <option *ngFor="let m of manufacturers" value="{{m}}">{{m}}</option>
+            </select>
+        </div>
+        <div>
+            <label>Description</label>
+            <input formControlName="Description" name="Description" type="text">
+            <div *ngIf="frmProduct.controls.Description.dirty && !frmProduct.controls.Description.valid">
+                <p *ngIf="frmProduct.controls.Description.errors.required">Value is must</p>
+            </div>
+        </div>
+        <div>
+            <label>Base Price</label>
+            <input type="text" formControlName="BasePrice" name="BasePrice">
+            <div *ngIf="frmProduct.controls.BasePrice.dirty && !frmProduct.controls.BasePrice.valid">
+                <p *ngIf="frmProduct.controls.BasePrice.errors.min">Value must be non negative</p>
+            </div>
+        </div>
+        <div>
+            <input type="button" value="Clear" (click)="clear()">
+            <input type="submit" value="Save" [disabled]="!frmProduct.valid">
+            <input type="button" value="Update" (click)="update(frmProduct)">
+            <input type="button" value="Delete" (click)="delete(frmProduct)">
+        </div>
+        <div>
+            <label>Sort</label>
+            <input type="radio" name="Sort" value="SortByProductName" (click)="sortByProductName()">
+            <label for="SortByProductName">Product Name</label>
+            <input type="radio" name="Sort" value="SortByPrice" (click)="sortByPrice()">
+            <label for="SortByPrice">Price</label>
+        </div>
+        <div>
+            <label>Reverse</label>
+            <input type="radio" name="Reverse" value="ReverseByProductName" (click)="reverseByProductName()">
+            <label for="ReverseByProductName">Product Name</label>
+            <input type="radio" name="Reverse" value="ReverseByPrice" (click)="reverseByPrice()">
+            <label for="ReverseByPrice">Price</label>
+        </div>
+    </form>
+</div>
+<br>
+<!-- <table>
+    <thead>
+        <tr>
+            <th>ProductRowId</th>
+            <th>ProductId</th>
+            <th>ProductName</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let prd of products">
+            <td>{{prd.ProductRowId}}</td>
+            <td>{{prd.ProductId}}</td>
+            <td>{{prd.ProductName}}</td>
+        </tr>
+    </tbody>
+</table> -->
+<!--Dynamic Table Generation-->
+<table>
+    <thead>
+        <tr>
+            <th *ngFor="let h of headers">{{h}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let prd of products" (click)="getSelectedRecord(prd)">
+            <td *ngFor="let h of headers">{{prd[h]}}</td>
+            <td><input type="button" value="Delete" (click)="deleteRow(prd)"></td>
+        </tr>
+    </tbody>
+</table>

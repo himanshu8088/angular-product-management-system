@@ -1,0 +1,17 @@
+<h2>The First Angular Component</h2>
+<div><strong> {{header}} </strong></div>
+<div>{{200 + 300}}</div>
+<br>
+<input type="text" [value]="header" class="form-control">
+<br>
+<a [href]="url">Mahesh Sabnis's BLOG</a>
+<br>
+<!--$event an an Angular's standard Event Service object-->
+<input type="button" value="Click Me" (click)="display($event)" class="btn btn-danger">
+<hr>
+<input type="text" [(ngModel)]="name" class="form-control">
+<hr>
+<input type="text" [(ngModel)]="name" class="form-control">
+<hr>
+<input type="text" [(ngModel)]="name" class="form-control">
+<hr>

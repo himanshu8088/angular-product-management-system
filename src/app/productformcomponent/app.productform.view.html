@@ -1,0 +1,70 @@
+<div>
+    <form name="frmProduct">
+        <div>
+            <label>Product Row Id</label>
+            <input type="text" name="ProductRowId" [(ngModel)]="product.ProductRowId">
+        </div>
+        <div>
+            <label>Product Id</label>
+            <input type="text" name="ProductId" [(ngModel)]="product.ProductId">
+        </div>
+        <div>
+            <label>Product Name</label>
+            <input type="text" name="ProductName" [(ngModel)]="product.ProductName">
+        </div>
+        <div>
+            <label>Categories</label>
+            <select name="CategoryName" [(ngModel)]="product.CategoryName">
+        <option *ngFor="let c of categories" value="{{c}}">{{c}}</option>
+      </select>
+        </div>
+        <div>
+            <label>Manufacturers</label>
+            <select name="Manufacturer" [(ngModel)]="product.Manufacturer">
+        <option *ngFor="let m of manufacturers" value="{{m}}">{{m}}</option>
+      </select>
+        </div>
+        <div>
+            <label>Description</label>
+            <input name="Description" type="text" [(ngModel)]="product.Description">
+        </div>
+        <div>
+            <label>Base Price</label>
+            <input type="text" name="BasePrice" [(ngModel)]="product.BasePrice">
+        </div>
+        <div>
+            <input type="button" value="Clear" (click)="clear()">
+            <input type="button" value="Save" (click)="save()">
+        </div>
+    </form>
+</div>
+<br>
+<!-- <table>
+    <thead>
+        <tr>
+            <th>ProductRowId</th>
+            <th>ProductId</th>
+            <th>ProductName</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let prd of products">
+            <td>{{prd.ProductRowId}}</td>
+            <td>{{prd.ProductId}}</td>
+            <td>{{prd.ProductName}}</td>
+        </tr>
+    </tbody>
+</table> -->
+<!--Dynamic Table Generation-->
+<table>
+    <thead>
+        <tr>
+            <th *ngFor="let h of headers">{{h}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let prd of products">
+            <td *ngFor="let h of headers">{{prd[h]}}</td>
+        </tr>
+    </tbody>
+</table>
