@@ -12,9 +12,9 @@ export class CustomValidator {
     }
   }
 
-  static NotExistsIn(list: Array<string>): ValidatorFn {
+  static NotExistsIn(list: Array<string>, value: string): ValidatorFn {
     return function (ctrl: AbstractControl): any {
-      const value: string = ctrl.value
+      console.log("ff");
       if (list.indexOf(value) !== -1)
         return { exists: true };
       else

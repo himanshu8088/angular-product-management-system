@@ -1,9 +1,9 @@
-import {Product} from './app.product.model';
+import { Product } from './app.product.model';
 
 export class Logic {
     private products: Array<Product>;
 
-    constructor(){
+    constructor() {
         this.products = new Array<Product>();
     }
 
@@ -14,7 +14,7 @@ export class Logic {
         return this.products;
     }
 
-    addProduct(prd: Product) : Array<Product> {
+    addProduct(prd: Product): Array<Product> {
         this.products.push(prd);
         return this.products;
     }

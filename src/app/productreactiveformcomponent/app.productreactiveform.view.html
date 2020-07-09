@@ -16,7 +16,7 @@
         </div>
         <div>
             <label>Product Id</label>
-            <input type="text" formControlName="ProductId" name="ProductId">
+            <input type="text" formControlName="ProductId" name="ProductId" (keyup)="checkifExists($event)">
             <div *ngIf="frmProduct.controls.ProductId.dirty && !frmProduct.controls.ProductId.valid">
                 <p *ngIf="frmProduct.controls.ProductId.errors.required">Value is must</p>
                 <p *ngIf="frmProduct.controls.ProductId.errors.exists">Duplicate entry not allowed</p>

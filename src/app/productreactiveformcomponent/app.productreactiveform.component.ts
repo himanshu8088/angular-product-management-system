@@ -49,7 +49,7 @@ export class ProductReactiveFormComponent implements OnInit {
                Validators.pattern('[0-9]+'),
                CustomValidator.CheckEven,
             ])),
-         ProductId: new FormControl(this.product.ProductId, Validators.compose([Validators.required, CustomValidator.NotExistsIn(this.logic.getProducts().map(x => x.ProductId))])),
+         ProductId: new FormControl(this.product.ProductId, Validators.required),
          ProductName: new FormControl(this.product.ProductName, Validators.required),
          CategoryName: new FormControl(this.product.CategoryName, Validators.required),
          Manufacturer: new FormControl(this.product.Manufacturer, Validators.required),
@@ -122,5 +122,12 @@ export class ProductReactiveFormComponent implements OnInit {
 
    reverseByPrice(): void {
       this.products.reverse();
+   }
+
+   checkifExists(event) {
+      let notExitsValidator = CustomValidator.NotExistsIn(this.products.map(x => x.ProductId), event.target.value);
+      let productIdFormControl = this.frmProduct.get('ProductId');
+      productIdFormControl.setValidators([notExitsValidator, Validators.required]);
+      productIdFormControl.updateValueAndValidity();
    }
 }
